@@ -15,7 +15,7 @@
     <section class="card" aria-label="Invitación">
       <header class="hero">
         <div class="badge">INVITACIÓN • DOMINGO</div>
-        <h1>Te tengo un plan chiquito… pero con alto impacto 🧠✨</h1>
+        <h1>Te tengo un plan chiquito… pero capaz de cambiar el día 🧠✨</h1>
         <p class="sub">
           Desayuno + caminata con <strong>Thor</strong>. Sin presión. Solo un momento bonito.
         </p>
@@ -24,7 +24,7 @@
           <button id="revealBtn" class="btn ghost" type="button">
             Ver la invitación 👀
           </button>
-          <p class="hint">Pista: no muerde (Thor sí, pero de amor).</p>
+          <p class="hint">Pista: promesa de que esto te va a sacar una sonrisa.</p>
         </div>
       </header>
 
@@ -47,6 +47,8 @@
           <h2>Propuesta oficial (y muy seria 😄)</h2>
           <p>
             Me gustaría invitarte a un desayuno rico y luego una caminata tranquila con Thor.
+          </p>
+          <p>  
             La idea es simple: conversar, reírnos un poquito y sumar un recuerdo bonito.
           </p>
 
@@ -57,11 +59,33 @@
             </div>
             <div class="detail">
               <span class="k">⏰ Hora</span>
-              <span class="v">9:30 a. m.</span>
+              <span class="v">9:10 a. m.</span>
             </div>
             <div class="detail">
               <span class="k">📍 Plan</span>
               <span class="v">Desayuno + caminata</span>
+            </div>
+          </div>
+
+          <!-- Carrusel de fotos -->
+          <div class="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="./Imagenes/img1.jpeg" alt="Foto 1" loading="lazy" />
+              </div>
+              <div class="carousel-item">
+                <img src="./Imagenes/img2.jpeg" alt="Foto 2" loading="lazy" />
+              </div>
+              <div class="carousel-item">
+                <img src="./Imagenes/img3.jpeg" alt="Foto 3" loading="lazy" />
+              </div>
+            </div>
+            <button class="carousel-btn prev" id="prevBtn" aria-label="Foto anterior">❮</button>
+            <button class="carousel-btn next" id="nextBtn" aria-label="Siguiente foto">❯</button>
+            <div class="carousel-dots">
+              <span class="dot active" data-index="0"></span>
+              <span class="dot" data-index="1"></span>
+              <span class="dot" data-index="2"></span>
             </div>
           </div>
         </section>
@@ -92,18 +116,7 @@
             </label>
           </div>
 
-          <div class="grid">
-            <label class="field">
-              <span>Tu nombre (opcional)</span>
-              <input type="text" name="nombre" placeholder="Como quieras aparecer" autocomplete="name" />
-            </label>
-
-            <label class="field">
-              <span>Nota (opcional)</span>
-              <input type="text" name="nota" placeholder="Ej: ¿a qué hora te queda mejor?" />
-            </label>
-          </div>
-
+         
           <!-- Metadatos útiles -->
           <input type="hidden" name="plan" value="Domingo - Desayuno y caminata con Thor" />
           <input type="hidden" id="deviceInfo" name="deviceInfo" value="" />
@@ -118,7 +131,7 @@
       </div>
 
       <footer class="foot">
-        <span>Hecho con intención (y un poquito de nerdismo).</span>
+        <span>Hecho con intención (y un poquito de nerdismo y susto).</span>
       </footer>
     </section>
   </main>
