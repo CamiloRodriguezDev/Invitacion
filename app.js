@@ -1,3 +1,78 @@
+// Handle reveal button to show invitation content
+document.addEventListener('DOMContentLoaded', () => {
+  const revealBtn = document.getElementById('revealBtn');
+  const content = document.getElementById('content');
+  const form = document.getElementById('inviteForm');
+  const statusEl = document.getElementById('status');
+  const modal = document.getElementById('modal');
+  const modalDesc = document.getElementById('modalDesc');
+  const closeModalBtn = document.getElementById('closeModal');
+
+  // Reveal content
+  if (revealBtn && content) {
+    revealBtn.addEventListener('click', () => {
+      content.classList.remove('hidden');
+    });
+  }
+
+  // Utility: open/close modal
+  function openModal(message) {
+    if (!modal) return alert(message);
+    modalDesc.textContent = message;
+    modal.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+  }
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeModal);
+  }
+
+  // Close modal clicking backdrop
+  const backdrop = document.querySelector('.modal-backdrop');
+  if (backdrop) {
+    backdrop.addEventListener('click', closeModal);
+  }
+
+  // Populate hidden metadata
+  const deviceInfoEl = document.getElementById('deviceInfo');
+  const timestampEl = document.getElementById('timestamp');
+  if (deviceInfoEl) {
+    deviceInfoEl.value = `${navigator.userAgent} | ${window.innerWidth}x${window.innerHeight}`;
+  }
+  if (timestampEl) {
+    timestampEl.value = new Date().toISOString();
+  }
+
+  // Handle form submit: show modal/prompt
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const data = new FormData(form);
+      const respuesta = data.get('respuesta');
+      const nombre = (data.get('nombre') || '').toString().trim();
+      const nota = (data.get('nota') || '').toString().trim();
+
+      const saludo = nombre ? `, ${nombre}` : '';
+      const extra = nota ? `\nNota: ${nota}` : '';
+      const msg = `Respuesta registrada${saludo}: ${respuesta}.${extra}`;
+
+      // Show modal; fallback to alert if modal missing
+      openModal(msg);
+
+      // Optional: update status text for screen readers
+      if (statusEl) {
+        statusEl.textContent = '¡Respuesta recibida!';
+      }
+    });
+  }
+});
 // 1) Botón “Ver la invitación”
 const revealBtn = document.getElementById("revealBtn");
 const content = document.getElementById("content");
