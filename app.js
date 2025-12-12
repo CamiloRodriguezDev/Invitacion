@@ -46,7 +46,7 @@ form?.addEventListener("submit", async (e) => {
     });
 
     if (res.ok) {
-      statusEl.textContent = "Listo. Respuesta enviada ✅";
+      statusEl.textContent = "Listo. Respuesta registrada ✅";
       form.reset();
     } else {
       statusEl.textContent = "Ups… no se pudo enviar. Intenta otra vez.";
