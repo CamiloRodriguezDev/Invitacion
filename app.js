@@ -49,9 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
     timestampEl.value = new Date().toISOString();
   }
 
-  // Handle form submit: show modal/prompt
+  // Handle form submit: show modal and send to Formspree
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const data = new FormData(form);
@@ -63,12 +63,25 @@ document.addEventListener('DOMContentLoaded', () => {
       const extra = nota ? `\nNota: ${nota}` : '';
       const msg = `Respuesta registrada${saludo}: ${respuesta}.${extra}`;
 
-      // Show modal; fallback to alert if modal missing
+      // Show modal immediately
       openModal(msg);
 
-      // Optional: update status text for screen readers
-      if (statusEl) {
-        statusEl.textContent = '¡Respuesta recibida!';
+      // Send to Formspree in background
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        
+        if (response.ok) {
+          console.log('✅ Respuesta enviada a Formspree');
+          if (statusEl) statusEl.textContent = '¡Respuesta recibida y guardada!';
+        } else {
+          console.warn('⚠️ Error al enviar a Formspree:', response.status);
+        }
+      } catch (error) {
+        console.error('❌ Error de red:', error);
       }
     });
   }
