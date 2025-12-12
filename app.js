@@ -1,37 +1,3 @@
-// Carrusel de fotos
-document.addEventListener('DOMContentLoaded', () => {
-  let currentIndex = 0;
-  const items = document.querySelectorAll('.carousel-item');
-  const dots = document.querySelectorAll('.dot');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-
-  function showItem(index) {
-    items.forEach((item, i) => {
-      item.classList.toggle('active', i === index);
-    });
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === index);
-    });
-  }
-
-  if (prevBtn) prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + items.length) % items.length;
-    showItem(currentIndex);
-  });
-
-  if (nextBtn) nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % items.length;
-    showItem(currentIndex);
-  });
-
-  dots.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-      currentIndex = parseInt(e.target.dataset.index);
-      showItem(currentIndex);
-    });
-  });
-});
 // 1) Botón “Ver la invitación”
 const revealBtn = document.getElementById("revealBtn");
 const content = document.getElementById("content");
