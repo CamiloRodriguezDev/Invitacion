@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Una invitación ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <main class="wrap">
+    <section class="card" aria-label="Invitación">
+      <header class="hero">
+        <div class="badge">INVITACIÓN • DOMINGO</div>
+        <h1>Te tengo un plan chiquito… pero con alto impacto 🧠✨</h1>
+        <p class="sub">
+          Desayuno + caminata con <strong>Thor</strong>. Sin presión. Solo un momento bonito.
+        </p>
+
+        <div class="reveal">
+          <button id="revealBtn" class="btn ghost" type="button">
+            Ver la invitación 👀
+          </button>
+          <p class="hint">Pista: no muerde (Thor sí, pero de amor).</p>
+        </div>
+      </header>
+
+      <div id="content" class="content hidden">
+        <figure class="media">
+          <!-- Cambia la URL por tu foto (o deja la de ejemplo) -->
+          <img
+            src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1400&q=80"
+            alt="Desayuno"
+            loading="lazy"
+          />
+          <figcaption>
+            <span class="pill">Domingo</span>
+            <span class="pill">Desayuno</span>
+            <span class="pill">Caminata con Thor</span>
+          </figcaption>
+        </figure>
+
+        <section class="copy">
+          <h2>Propuesta oficial (y muy seria 😄)</h2>
+          <p>
+            Me gustaría invitarte a un desayuno rico y luego una caminata tranquila con Thor.
+            La idea es simple: conversar, reírnos un poquito y sumar un recuerdo bonito.
+          </p>
+
+          <div class="details">
+            <div class="detail">
+              <span class="k">📅 Día</span>
+              <span class="v">Domingo</span>
+            </div>
+            <div class="detail">
+              <span class="k">⏰ Hora</span>
+              <span class="v">9:30 a. m.</span>
+            </div>
+            <div class="detail">
+              <span class="k">📍 Plan</span>
+              <span class="v">Desayuno + caminata</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- FORM: envía a tu correo vía Formspree -->
+        <form id="inviteForm" class="form" method="POST">
+          <h3>¿Te animas?</h3>
+
+          <div class="choices" role="radiogroup" aria-label="Respuesta">
+            <label class="choice">
+              <input type="radio" name="respuesta" value="Sí, me encantaría ✅" required />
+              <span class="choice-ui">
+                <strong>Sí, me encantaría</strong>
+                <small>Vamos con toda.</small>
+              </span>
+            </label>
+
+            <label class="choice">
+              <input type="radio" name="respuesta" value="Esta vez no 🙏" required />
+              <span class="choice-ui">
+                <strong>Esta vez no</strong>
+                <small>Todo bien, gracias por decirlo.</small>
+              </span>
+            </label>
+          </div>
+
+          <div class="grid">
+            <label class="field">
+              <span>Tu nombre (opcional)</span>
+              <input type="text" name="nombre" placeholder="Como quieras aparecer" autocomplete="name" />
+            </label>
+
+            <label class="field">
+              <span>Nota (opcional)</span>
+              <input type="text" name="nota" placeholder="Ej: ¿a qué hora te queda mejor?" />
+            </label>
+          </div>
+
+          <!-- Metadatos útiles -->
+          <input type="hidden" name="plan" value="Domingo - Desayuno y caminata con Thor" />
+          <input type="hidden" id="deviceInfo" name="deviceInfo" value="" />
+          <input type="hidden" id="timestamp" name="timestamp" value="" />
+
+          <button class="btn primary" type="submit" id="submitBtn">
+            Enviar respuesta ✉️
+          </button>
+
+          <p id="status" class="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <footer class="foot">
+        <span>Hecho con intención (y un poquito de nerdismo).</span>
+      </footer>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
