@@ -61,27 +61,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const saludo = nombre ? `, ${nombre}` : '';
       const extra = nota ? `\nNota: ${nota}` : '';
-      const msg = `Respuesta registrada${saludo}: ${respuesta}.${extra}`;
+      let msg = `Respuesta registrada${saludo}: ${respuesta}.${extra}`;
 
       // Show modal immediately
-      openModal(msg);
+      openModal(msg + '\n\nEnviando...');
 
       // Send to Formspree in background
       try {
+        console.log('📤 Enviando a Formspree:', form.action);
         const response = await fetch(form.action, {
           method: 'POST',
           body: data,
           headers: { 'Accept': 'application/json' }
         });
         
+        console.log('📬 Respuesta de Formspree:', response.status, response.statusText);
+        const result = await response.json().catch(() => ({}));
+        console.log('📄 Datos recibidos:', result);
+        
         if (response.ok) {
-          console.log('✅ Respuesta enviada a Formspree');
-          if (statusEl) statusEl.textContent = '¡Respuesta recibida y guardada!';
+          modalDesc.textContent = msg + '\n\n✅ ¡Enviado exitosamente a tu correo!';
+          if (statusEl) statusEl.textContent = '✅ Respuesta guardada y enviada por email.';
+          alert('✅ ÉXITO: Respuesta enviada correctamente a Formspree.\nRecibirás un email en Camilo.rodriguez1@utp.edu.co');
         } else {
-          console.warn('⚠️ Error al enviar a Formspree:', response.status);
+          modalDesc.textContent = msg + '\n\n⚠️ Error al enviar (código: ' + response.status + ')';
+          if (statusEl) statusEl.textContent = '⚠️ Error al enviar.';
+          alert('⚠️ ERROR: No se pudo enviar.\nCódigo: ' + response.status + '\nRevisa la consola (F12).');
         }
       } catch (error) {
         console.error('❌ Error de red:', error);
+        modalDesc.textContent = msg + '\n\n❌ Error de conexión: ' + error.message;
+        if (statusEl) statusEl.textContent = '❌ Error de conexión.';
+        alert('❌ ERROR DE RED: ' + error.message + '\n\nRevisa tu conexión y la consola (F12).');
       }
     });
   }
