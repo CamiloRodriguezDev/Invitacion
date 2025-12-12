@@ -1,6 +1,5 @@
-// Handle reveal button to show invitation content
+// Carrusel de fotos
 document.addEventListener('DOMContentLoaded', () => {
-  // ===== CARRUSEL =====
   let currentIndex = 0;
   const items = document.querySelectorAll('.carousel-item');
   const dots = document.querySelectorAll('.dot');
@@ -32,104 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
       showItem(currentIndex);
     });
   });
-
-  // ===== REVEAL Y FORM =====
-  const revealBtn = document.getElementById('revealBtn');
-  const content = document.getElementById('content');
-  const form = document.getElementById('inviteForm');
-  const statusEl = document.getElementById('status');
-  const modal = document.getElementById('modal');
-  const modalDesc = document.getElementById('modalDesc');
-  const closeModalBtn = document.getElementById('closeModal');
-
-  // Reveal content
-  if (revealBtn && content) {
-    revealBtn.addEventListener('click', () => {
-      content.classList.remove('hidden');
-    });
-  }
-
-  // Utility: open/close modal
-  function openModal(message) {
-    if (!modal) return alert(message);
-    modalDesc.textContent = message;
-    modal.classList.remove('hidden');
-    document.body.classList.add('modal-open');
-  }
-
-  function closeModal() {
-    if (!modal) return;
-    modal.classList.add('hidden');
-    document.body.classList.remove('modal-open');
-  }
-
-  if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', closeModal);
-  }
-
-  // Close modal clicking backdrop
-  const backdrop = document.querySelector('.modal-backdrop');
-  if (backdrop) {
-    backdrop.addEventListener('click', closeModal);
-  }
-
-  // Populate hidden metadata
-  const deviceInfoEl = document.getElementById('deviceInfo');
-  const timestampEl = document.getElementById('timestamp');
-  if (deviceInfoEl) {
-    deviceInfoEl.value = `${navigator.userAgent} | ${window.innerWidth}x${window.innerHeight}`;
-  }
-  if (timestampEl) {
-    timestampEl.value = new Date().toISOString();
-  }
-
-  // Handle form submit: show modal and send to Formspree
-  if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const data = new FormData(form);
-      const respuesta = data.get('respuesta');
-      const nombre = (data.get('nombre') || '').toString().trim();
-      const nota = (data.get('nota') || '').toString().trim();
-
-      const saludo = nombre ? `, ${nombre}` : '';
-      const extra = nota ? `\nNota: ${nota}` : '';
-      let msg = `Respuesta registrada${saludo}: ${respuesta}.${extra}`;
-
-      // Show modal immediately
-      openModal(msg + '\n\nEnviando...');
-
-      // Send to Formspree in background
-      try {
-        console.log('📤 Enviando a Formspree:', form.action);
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-        
-        console.log('📬 Respuesta de Formspree:', response.status, response.statusText);
-        const result = await response.json().catch(() => ({}));
-        console.log('📄 Datos recibidos:', result);
-        
-        if (response.ok) {
-          modalDesc.textContent = msg + '\n\n✅ ¡Enviado exitosamente a tu correo!';
-          if (statusEl) statusEl.textContent = '✅ Respuesta guardada y enviada por email.';
-          alert('✅ ÉXITO: Respuesta enviada correctamente a Formspree.\nRecibirás un email en Camilo.rodriguez1@utp.edu.co');
-        } else {
-          modalDesc.textContent = msg + '\n\n⚠️ Error al enviar (código: ' + response.status + ')';
-          if (statusEl) statusEl.textContent = '⚠️ Error al enviar.';
-          alert('⚠️ ERROR: No se pudo enviar.\nCódigo: ' + response.status + '\nRevisa la consola (F12).');
-        }
-      } catch (error) {
-        console.error('❌ Error de red:', error);
-        modalDesc.textContent = msg + '\n\n❌ Error de conexión: ' + error.message;
-        if (statusEl) statusEl.textContent = '❌ Error de conexión.';
-        alert('❌ ERROR DE RED: ' + error.message + '\n\nRevisa tu conexión y la consola (F12).');
-      }
-    });
-  }
 });
 // 1) Botón “Ver la invitación”
 const revealBtn = document.getElementById("revealBtn");

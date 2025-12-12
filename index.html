@@ -91,11 +91,7 @@
         </section>
 
         <!-- FORM: envía a tu correo vía Formspree -->
-        <!-- Instrucciones: Ve a formspree.io, crea cuenta gratis con tu correo, 
-             crea un nuevo form y reemplaza 'YOUR_FORM_ID' con el ID que te den -->
-        <form id="inviteForm" class="form" method="POST" action="https://formspree.io/f/manraaar">
-          <input type="hidden" name="_replyto" value="Camilo.rodriguez1@utp.edu.co" />
-          <input type="hidden" name="_subject" value="Nueva respuesta - Invitación Domingo" />
+        <form id="inviteForm" class="form" method="POST">
           <h3>¿Te animas?</h3>
 
           <div class="choices" role="radiogroup" aria-label="Respuesta">
@@ -137,15 +133,5 @@
   </main>
 
   <script src="app.js"></script>
-  
-  <!-- Modal sencillo para confirmación -->
-  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
-    <div class="modal-content">
-      <h3 id="modalTitle">¡Gracias por tu respuesta!</h3>
-      <p id="modalDesc" class="modal-text"></p>
-      <button id="closeModal" class="btn">Cerrar</button>
-    </div>
-    <div class="modal-backdrop"></div>
-  </div>
 </body>
 </html>
