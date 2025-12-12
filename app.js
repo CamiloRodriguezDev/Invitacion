@@ -119,7 +119,7 @@ const statusEl = document.getElementById("status");
 const submitBtn = document.getElementById("submitBtn");
 
 // 👉 PON AQUÍ tu endpoint de Formspree (paso 2)
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/XXXXXXXX";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/manraaar";
 
 if (form) form.action = FORMSPREE_ENDPOINT;
 
