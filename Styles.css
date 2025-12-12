@@ -1,10 +1,80 @@
-/* Modal basic styles */
-.modal.hidden { display: none; }
-.modal { position: fixed; inset: 0; z-index: 1000; }
-.modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(2px); }
-.modal-content { position: relative; z-index: 1001; max-width: 520px; margin: 10vh auto; background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-.modal-text { margin: 8px 0 16px; }
-.modal-open { overflow: hidden; }
+/* Modal styles */
+.modal.hidden { 
+  display: none; 
+}
+
+.modal { 
+  position: fixed; 
+  inset: 0; 
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-backdrop { 
+  position: absolute; 
+  inset: 0; 
+  background: rgba(0,0,0,0.65); 
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-content { 
+  position: relative; 
+  z-index: 1001; 
+  max-width: 480px; 
+  width: 100%;
+  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.08));
+  border: 1px solid var(--stroke); 
+  border-radius: 20px; 
+  padding: 32px; 
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  backdrop-filter: blur(14px);
+  animation: modalSlideIn 0.3s ease;
+}
+
+.modal-content h3 {
+  margin: 0 0 12px;
+  font-size: 22px;
+  color: var(--text);
+  font-family: "Fraunces", serif;
+}
+
+.modal-text { 
+  margin: 0 0 24px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 15px;
+  white-space: pre-line;
+}
+
+.modal-open { 
+  overflow: hidden; 
+}
+
+.modal-content .btn {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(255,105,180,.35), rgba(0,255,200,.22));
+  border-color: rgba(255,255,255,.22);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(-20px) scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
 :root{
   --bg1:#0b1020;
   --bg2:#1a1033;
